@@ -1,6 +1,7 @@
 package com.sitop.coolweather
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -36,6 +37,8 @@ class ChooseAreaFragment : Fragment() {
         const val PROVINCE = "province"
         const val CITY = "city"
         const val COUNTY = "county"
+
+        const val WEATHER_ID = "weather_id"
     }
 
     private var progressDialog: ProgressDialog?=null
@@ -67,6 +70,13 @@ class ChooseAreaFragment : Fragment() {
                 LEVEL_CITY ->{
                     selectedCity = cityList[position]
                     queryCounties()
+                }
+                LEVEL_COUNTY ->{
+                    val weatherId = countyList[position].weatherId
+                    var intent = Intent(activity,WeatherActivity::class.java)
+                    intent.putExtra(WEATHER_ID,weatherId)
+                    startActivity(intent)
+                    activity?.finish()
                 }
             }
         }
