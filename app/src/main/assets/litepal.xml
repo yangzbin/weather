@@ -1,0 +1,9 @@
+<litepal>
+    <dbname value="coll_whather" />
+    <version value="1" />
+    <list>
+        <mapping class="com.sitop.coolweather.db.Province"/>
+        <mapping class="com.sitop.coolweather.db.City"/>
+        <mapping class="com.sitop.coolweather.db.County"/>
+    </list>
+</litepal>
