@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
@@ -34,21 +36,28 @@ class WeatherActivity : AppCompatActivity() {
             window.statusBarColor = Color.TRANSPARENT
         }
         setContentView(R.layout.activity_weather)
+        id_swipe_refresh.setColorSchemeResources(R.color.colorPrimary)
+        var weatherId:String?=null
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val weatherString = prefs.getString("weather",null)
         if (!weatherString.isNullOrEmpty()){
             val weather = Utility.handleWeatherResponse(weatherString)
+            weatherId = weather?.basic?.weatherId
             showWeatherInfo(weather)
         }else{
-            val weatherId = intent.getStringExtra(ChooseAreaFragment.WEATHER_ID)
+            weatherId = intent.getStringExtra(ChooseAreaFragment.WEATHER_ID)
             id_scroll_weather.visibility = View.INVISIBLE
             requestWeather(weatherId)
         }
+        id_swipe_refresh.setOnRefreshListener { requestWeather(weatherId) }
         val picUrl = prefs.getString("bing_pic", null)
         if(!picUrl.isNullOrEmpty()){
             Glide.with(this).load(picUrl).into(id_img_pic)
         }else{
             loadBingPic()
+        }
+        id_btn_home.setOnClickListener {
+            id_drawer_layout.openDrawer(GravityCompat.START)
         }
     }
 
@@ -72,7 +81,7 @@ class WeatherActivity : AppCompatActivity() {
         })
     }
 
-    private fun requestWeather(weatherId: String?) {
+    fun requestWeather(weatherId: String?) {
         val key = "bc0418b57b2d4918819d3974ac1285d9"
         val weatherUrl = "http://guolin.tech/api/weather?cityid=$weatherId&key=$key"
         HttpUtil.sendOkHttpRequest(weatherUrl,object :Callback{
@@ -88,10 +97,12 @@ class WeatherActivity : AppCompatActivity() {
                     }else{
                         Toast.makeText(this@WeatherActivity,"获取天气信息失败",Toast.LENGTH_SHORT).show()
                     }
+                    id_swipe_refresh.isRefreshing = false
                 }
             }
             override fun onFailure(call: Call, e: IOException) {
                 Toast.makeText(this@WeatherActivity,"获取天气信息失败",Toast.LENGTH_SHORT).show()
+                id_swipe_refresh.isRefreshing = false
             }
 
         })

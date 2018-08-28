@@ -15,6 +15,7 @@ import com.sitop.coolweather.db.County
 import com.sitop.coolweather.db.Province
 import com.sitop.coolweather.util.HttpUtil
 import com.sitop.coolweather.util.Utility
+import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.choose_area.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -73,10 +74,17 @@ class ChooseAreaFragment : Fragment() {
                 }
                 LEVEL_COUNTY ->{
                     val weatherId = countyList[position].weatherId
-                    var intent = Intent(activity,WeatherActivity::class.java)
-                    intent.putExtra(WEATHER_ID,weatherId)
-                    startActivity(intent)
-                    activity?.finish()
+                    if (activity is MainActivity){
+                        var intent = Intent(activity,WeatherActivity::class.java)
+                        intent.putExtra(WEATHER_ID,weatherId)
+                        startActivity(intent)
+                        activity?.finish()
+                    }else if (activity is WeatherActivity){
+                        val ac:WeatherActivity = activity as WeatherActivity
+                        ac.id_drawer_layout.closeDrawers()
+                        ac.id_swipe_refresh.isRefreshing = true
+                        ac.requestWeather(weatherId)
+                    }
                 }
             }
         }
