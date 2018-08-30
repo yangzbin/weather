@@ -29,7 +29,7 @@ import java.io.IOException
 
 class WeatherActivity : AppCompatActivity() {
     companion object {
-        const val KEY = "bc0418b57b2d4918819d3974ac1285d9"
+        const val KEY = "4035418dac80480b813f45a713517220"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.sitop.coolweather.db.City
@@ -21,13 +20,12 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import org.litepal.LitePal
-import org.litepal.crud.LitePalSupport
 import java.io.IOException
 
 /**
  * Created by Yangzb on 2018/8/28 11:34
  * E-mail：yangzongbin@si-top.com
- * Decsribe:
+ * Describe:
  */
 class ChooseAreaFragment : Fragment() {
     companion object {
@@ -80,7 +78,7 @@ class ChooseAreaFragment : Fragment() {
                         startActivity(intent)
                         activity?.finish()
                     }else if (activity is WeatherActivity){
-                        val ac:WeatherActivity = activity as WeatherActivity
+                        val ac = activity as WeatherActivity
                         ac.id_drawer_layout.closeDrawers()
                         ac.id_swipe_refresh.isRefreshing = true
                         ac.requestWeather(weatherId)
