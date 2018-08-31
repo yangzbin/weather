@@ -8,7 +8,7 @@ import okhttp3.Request
 /**
  * Created by Yangzb on 2018/8/28 10:22
  * E-mail：yangzongbin@si-top.com
- * Decsribe:网络请求工具类
+ * Describe:网络请求工具类
  */
 object HttpUtil {
     fun sendOkHttpRequest(address:String,callback:Callback){
