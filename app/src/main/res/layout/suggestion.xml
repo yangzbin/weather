@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:text="生活建议"
+        android:text="@string/live_suggestion"
         android:textSize="20sp"
         android:textColor="#fff"/>
     <TextView

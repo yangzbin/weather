@@ -12,7 +12,7 @@
         android:layout_marginTop="15dp"
         android:textSize="20sp"
         android:textColor="#fff"
-        android:text="预报"/>
+        android:text="@string/forecast"/>
     <LinearLayout
         android:id="@+id/id_ll_forecast"
         android:layout_width="match_parent"

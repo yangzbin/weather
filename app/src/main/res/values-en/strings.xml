@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cool_Weather</string>
+    <string name="air_quality">Air Quality</string>
+    <string name="forecast">Forecast</string>
+    <string name="live_suggestion">Live_Suggestion</string>
+</resources>
